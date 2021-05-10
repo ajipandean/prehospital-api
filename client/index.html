@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SocketIO Testing Client</title>
+  </head>
+
+  <body>
+    <h1>Hello world</h1>
+
+    <script src="../node_modules/socket.io-client/dist/socket.io.js"></script>
+    <script>
+      const socket = io('http://localhost:3000');
+
+      socket.on('connect', () => {
+        console.log('connected');
+
+        socket.emit('chat', 'Hello');
+      })
+    </script>
+  </body>
+</html>

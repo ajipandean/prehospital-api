@@ -13,11 +13,9 @@ export class AuthService {
     return await this.usersService.findByEmail(email);
   }
 
-  async signJWT(user: any) {
+  async generateToken(user: any) {
     const payload = {
-      group_name: user.group_name,
       email: user.email,
-      role: user.role,
       sub: user.id,
     };
 

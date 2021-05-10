@@ -10,6 +10,6 @@ export class AuthController {
   @UseGuards(LocalAuthGuard)
   @Post('sign-in')
   async signIn(@Request() req: Req) {
-    return this.authService.signJWT(req.user);
+    return this.authService.generateToken(req.user);
   }
 }

@@ -26,4 +26,12 @@ export class UsersService {
     const user = this.usersRepository.create(createUserDto);
     return await this.usersRepository.save(user);
   }
+
+  async updateOne(id: string, createUserDto: CreateUserDto): Promise<any> {
+    return await this.usersRepository.update(id, createUserDto);
+  }
+
+  async countUsers(query: any): Promise<number> {
+    return await this.usersRepository.count(query);
+  }
 }

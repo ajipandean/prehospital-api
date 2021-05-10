@@ -4,7 +4,9 @@ import {
   Controller,
   Get,
   HttpStatus,
+  Param,
   Post,
+  Put,
   Request,
   Res,
   UseGuards,
@@ -24,7 +26,9 @@ export class UsersController {
     @Body() user: CreateUserDto,
     @Res({ passthrough: true }) res: Response,
   ): Promise<Users> {
-    const isUserExist = await this.userService.findByEmail(user.email);
+    const isUserExist = await this.userService.countUsers({
+      email: user.email,
+    });
     if (isUserExist)
       throw new BadRequestException(
         `User with email ${user.email} already exist.`,
@@ -38,5 +42,18 @@ export class UsersController {
   @Get('profile')
   async getProfile(@Request() req: Req) {
     return req.user;
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Put(':id')
+  async updateUser(
+    @Param() params: any,
+    @Body() createUserDto: CreateUserDto,
+  ): Promise<any> {
+    const isUserExist = await this.userService.countUsers({ id: params.id });
+    if (!isUserExist)
+      throw new BadRequestException(`User with id ${params.id} doesn't exists`);
+
+    return await this.userService.updateOne(params.id, createUserDto);
   }
 }

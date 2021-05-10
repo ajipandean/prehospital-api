@@ -20,9 +20,9 @@ export class Chats {
   user: Users;
 
   @Column()
-  to: string;
+  hospital_id: string;
 
-  @Column()
+  @Column({ default: false })
   is_deleted: boolean;
 
   @CreateDateColumn()

@@ -14,7 +14,19 @@
       socket.on('connect', () => {
         console.log('connected');
 
-        socket.emit('chat', 'Hello');
+        socket.emit('init_chat', {
+          user: {
+            id: "025a9278-55ce-4f8d-8bf9-5763f2eb5b08",
+            group_name: "Primakara Squad",
+            email: "ajikun@gmail.com",
+            role: "STUDENT",
+            is_deleted: false,
+            created_at: "2021-05-10T05:12:37.922Z",
+            updated_at: "2021-05-10T06:48:59.000Z",
+            deleted_at: null
+          },
+          hospital_id: "RSUD Sanglah"
+        });
       })
     </script>
   </body>

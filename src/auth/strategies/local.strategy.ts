@@ -20,10 +20,6 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
       throw new UnauthorizedException(`Invalid password for email ${email}`);
 
     delete user['password'];
-    delete user['is_deleted'];
-    delete user['created_at'];
-    delete user['updated_at'];
-    delete user['deleted_at'];
     return user;
   }
 }

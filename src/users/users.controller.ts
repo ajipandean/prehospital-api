@@ -2,11 +2,15 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Get,
   HttpStatus,
   Post,
+  Request,
   Res,
+  UseGuards,
 } from '@nestjs/common';
-import { Response } from 'express';
+import { Request as Req, Response } from 'express';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { CreateUserDto } from './dto/create-user.dto';
 import { Users } from './users.entity';
 import { UsersService } from './users.service';
@@ -28,5 +32,11 @@ export class UsersController {
 
     res.status(HttpStatus.CREATED);
     return await this.userService.insertOne(user);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('profile')
+  async getProfile(@Request() req: Req) {
+    return req.user;
   }
 }

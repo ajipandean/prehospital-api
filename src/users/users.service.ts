@@ -22,7 +22,8 @@ export class UsersService {
     return this.usersRepository.findOne({ email });
   }
 
-  async insertOne(user: CreateUserDto): Promise<any> {
-    return await this.usersRepository.insert(user);
+  async insertOne(createUserDto: CreateUserDto): Promise<any> {
+    const user = this.usersRepository.create(createUserDto);
+    return await this.usersRepository.save(user);
   }
 }

@@ -4,10 +4,12 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
+import { Chats } from 'src/chats/chats.entity';
 
 @Entity()
 export class Users {
@@ -28,6 +30,9 @@ export class Users {
 
   @Column({ default: false })
   is_deleted: boolean;
+
+  @OneToMany(() => Chats, (chat) => chat.user)
+  chats: Chats;
 
   @CreateDateColumn()
   created_at: Date;

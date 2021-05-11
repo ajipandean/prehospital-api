@@ -11,6 +11,10 @@ export class ChatsService {
     private readonly chatsRepository: Repository<Chats>,
   ) {}
 
+  helloWorld(): string {
+    return 'Hello, world!';
+  }
+
   async insertOne(createChatDto: CreateChatDto): Promise<Chats> {
     const chat = this.chatsRepository.create(createChatDto);
     return await this.chatsRepository.save(chat);

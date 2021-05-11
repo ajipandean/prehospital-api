@@ -1,5 +1,4 @@
-import { Messages } from 'src/messages/messages.entity';
-import { Users } from 'src/users/users.entity';
+import { Chats } from 'src/chats/chats.entity';
 import {
   Column,
   CreateDateColumn,
@@ -7,25 +6,21 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity()
-export class Chats {
+export class Messages {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @OneToMany(() => Messages, (message) => message.chat)
-  messages: Messages;
-
-  @ManyToOne(() => Users, (user) => user.chats)
-  @JoinColumn({ name: 'user_id' })
-  user: Users;
+  @ManyToOne(() => Chats, (chat) => chat.messages)
+  @JoinColumn({ name: 'chat_id' })
+  chat: Chats;
 
   @Column()
-  hospital_id: string;
+  message: string;
 
   @Column({ default: false })
   is_deleted: boolean;

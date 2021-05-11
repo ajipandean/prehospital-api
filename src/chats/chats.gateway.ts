@@ -6,20 +6,26 @@ import {
   WebSocketServer,
 } from '@nestjs/websockets';
 import { Server } from 'socket.io';
+import { CreateMessageDto } from 'src/messages/dto/create-message.dto';
+import { MessagesService } from 'src/messages/messages.service';
 import { Chats } from './chats.entity';
 import { ChatsService } from './chats.service';
 import { CreateChatDto } from './dto/create-chat.dto';
 
 @WebSocketGateway()
 export class ChatsGateway implements OnGatewayConnection {
-  constructor(private readonly chatsService: ChatsService) {}
+  constructor(
+    private readonly chatsService: ChatsService,
+    private readonly messagesService: MessagesService,
+  ) {}
 
   @WebSocketServer()
   server: Server;
 
   @SubscribeMessage('send_message')
-  handleTest(@MessageBody() message: string) {
-    this.server.emit('recv_message', message);
+  async handleSendMessage(@MessageBody() createMessageDto: CreateMessageDto) {
+    const newMessage = await this.messagesService.insertOne(createMessageDto);
+    this.server.emit('recv_message', newMessage);
   }
 
   @SubscribeMessage('init_chat')

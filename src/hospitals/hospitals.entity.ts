@@ -1,8 +1,10 @@
+import { Doctors } from 'src/doctors/doctors.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -11,6 +13,9 @@ import {
 export class Hospitals {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @OneToMany(() => Doctors, (doctor) => doctor.hospital)
+  doctors: Doctors;
 
   @Column()
   standard: number;

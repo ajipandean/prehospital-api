@@ -7,6 +7,7 @@ import { ChatsModule } from './chats/chats.module';
 import { ChatsGateway } from './chats/chats.gateway';
 import { MessagesModule } from './messages/messages.module';
 import { HospitalsModule } from './hospitals/hospitals.module';
+import { DoctorsModule } from './doctors/doctors.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { HospitalsModule } from './hospitals/hospitals.module';
     ChatsModule,
     MessagesModule,
     HospitalsModule,
+    DoctorsModule,
   ],
   providers: [ChatsGateway],
 })

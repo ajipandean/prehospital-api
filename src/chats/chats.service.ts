@@ -11,8 +11,16 @@ export class ChatsService {
     private readonly chatsRepository: Repository<Chats>,
   ) {}
 
-  helloWorld(): string {
-    return 'Hello, world!';
+  async findAll(): Promise<Chats[]> {
+    return await this.chatsRepository.find();
+  }
+
+  async findById(id: string): Promise<Chats> {
+    return await this.chatsRepository
+      .createQueryBuilder('chat')
+      .where('chat.id = :id', { id })
+      .leftJoinAndSelect('chat.messages', 'messages')
+      .getOne();
   }
 
   async insertOne(createChatDto: CreateChatDto): Promise<Chats> {

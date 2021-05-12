@@ -28,7 +28,7 @@ export class Doctors {
   @Column()
   password: string;
 
-  @Column()
+  @Column({ nullable: true })
   fcm_token: string;
 
   @Column({ default: false })

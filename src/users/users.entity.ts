@@ -25,9 +25,6 @@ export class Users {
   @Column()
   password: string;
 
-  @Column()
-  role: string;
-
   @Column({ default: false })
   is_deleted: boolean;
 

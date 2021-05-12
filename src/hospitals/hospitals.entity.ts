@@ -17,7 +17,7 @@ export class Hospitals {
   @OneToMany(() => Doctors, (doctor) => doctor.hospital)
   doctors: Doctors;
 
-  @Column()
+  @Column({ nullable: true })
   standard: number;
 
   @Column()

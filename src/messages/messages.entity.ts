@@ -20,7 +20,10 @@ export class Messages {
   chat: Chats;
 
   @Column()
-  message: string;
+  header: string;
+
+  @Column()
+  body: string;
 
   @Column({ default: false })
   is_deleted: boolean;

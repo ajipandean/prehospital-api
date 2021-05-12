@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { ChatsModule } from './chats/chats.module';
 import { ChatsGateway } from './chats/chats.gateway';
 import { MessagesModule } from './messages/messages.module';
+import { HospitalsModule } from './hospitals/hospitals.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { MessagesModule } from './messages/messages.module';
     AuthModule,
     ChatsModule,
     MessagesModule,
+    HospitalsModule,
   ],
   providers: [ChatsGateway],
 })

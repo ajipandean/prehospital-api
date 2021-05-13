@@ -11,44 +11,41 @@ import {
 
 @Entity()
 export class Hospitals {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @OneToMany(() => Doctors, (doctor) => doctor.hospital)
   doctors: Doctors;
 
-  @Column({ nullable: true })
-  standard: number;
+  @Column({ length: 8 })
+  code: string;
 
   @Column()
   name: string;
 
-  @Column({ length: 2 })
-  accreditation: string;
-
-  @Column()
+  @Column({ type: 'char', length: 1 })
   category: string;
 
   @Column()
+  status: string;
+
+  @Column({ type: 'dec' })
   rating: number;
 
   @Column()
   address: string;
 
-  @Column()
+  @Column({ type: 'dec', precision: 8, scale: 6 })
   latitude: number;
 
-  @Column()
+  @Column({ type: 'dec', precision: 9, scale: 6 })
   longitude: number;
 
   @Column()
   owner: string;
 
   @Column()
-  city: string;
-
-  @Column()
-  telp: string;
+  telephone_number: string;
 
   @Column({ default: false })
   is_deleted: boolean;

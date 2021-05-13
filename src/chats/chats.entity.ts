@@ -1,3 +1,4 @@
+import { Hospitals } from 'src/hospitals/hospitals.entity';
 import { Messages } from 'src/messages/messages.entity';
 import { Users } from 'src/users/users.entity';
 import {
@@ -24,8 +25,9 @@ export class Chats {
   @JoinColumn({ name: 'user_id' })
   user: Users;
 
-  @Column()
-  hospital_id: string;
+  @ManyToOne(() => Hospitals, (hospital) => hospital.chats)
+  @JoinColumn({ name: 'hospital_id' })
+  hospital: Hospitals;
 
   @Column({ default: false })
   is_deleted: boolean;

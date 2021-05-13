@@ -1,3 +1,4 @@
+import { Chats } from 'src/chats/chats.entity';
 import { Doctors } from 'src/doctors/doctors.entity';
 import {
   Column,
@@ -13,6 +14,9 @@ import {
 export class Hospitals {
   @PrimaryGeneratedColumn('uuid')
   id: string;
+
+  @OneToMany(() => Chats, (chat) => chat.hospital)
+  chats: Chats;
 
   @OneToMany(() => Doctors, (doctor) => doctor.hospital)
   doctors: Doctors;

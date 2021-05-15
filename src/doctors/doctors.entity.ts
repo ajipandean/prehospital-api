@@ -1,20 +1,23 @@
+import { Hospitals } from 'src/hospitals/hospitals.entity';
 import {
-  BeforeInsert,
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  OneToMany,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import * as bcrypt from 'bcrypt';
-import { Chats } from 'src/chats/chats.entity';
 
 @Entity()
-export class Users {
+export class Doctors {
   @PrimaryGeneratedColumn('uuid')
   id: string;
+
+  @ManyToOne(() => Hospitals, (hospital) => hospital.doctors)
+  @JoinColumn({ name: 'hospital_id' })
+  hospital: Hospitals;
 
   @Column()
   group_name: string;
@@ -25,11 +28,11 @@ export class Users {
   @Column()
   password: string;
 
+  @Column({ nullable: true })
+  fcm_token: string;
+
   @Column({ default: false })
   is_deleted: boolean;
-
-  @OneToMany(() => Chats, (chat) => chat.user)
-  chats: Chats;
 
   @CreateDateColumn()
   created_at: Date;
@@ -39,11 +42,4 @@ export class Users {
 
   @DeleteDateColumn()
   deleted_at: Date;
-
-  @BeforeInsert()
-  async hashPassword() {
-    const saltRounds = 10;
-    const hashedPassword = await bcrypt.hash(this.password, saltRounds);
-    this.password = hashedPassword;
-  }
 }

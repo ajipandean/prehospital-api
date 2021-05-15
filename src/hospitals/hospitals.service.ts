@@ -11,6 +11,9 @@ export class HospitalsService {
   ) {}
 
   async findAll(): Promise<Hospitals[]> {
-    return await this.hospitalsRepository.find();
+    return await this.hospitalsRepository
+      .createQueryBuilder('hospital')
+      .orderBy('hospital.rating', 'DESC')
+      .getMany();
   }
 }

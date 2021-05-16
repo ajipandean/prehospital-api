@@ -1,0 +1,10 @@
+runtime: nodejs
+env: flex
+service: canary
+
+manual_scaling:
+  instances: 1
+
+network:
+  name: default
+  session_affinity: true

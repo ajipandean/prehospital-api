@@ -19,7 +19,8 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "gcp-build": "yarn build"
+    "gcp-build": "yarn build",
+    "deploy:canary": "gcloud app deploy canary.yaml"
   },
   "dependencies": {
     "@nestjs/common": "^7.6.15",

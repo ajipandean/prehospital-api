@@ -13,9 +13,7 @@ import { ConfigModule } from '@nestjs/config';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: `.env.${
-        process.env.NODE_ENV === 'development' ? 'development' : 'production'
-      }`,
+      envFilePath: `.env.${process.env.NODE_ENV}`,
     }),
     TypeOrmModule.forRootAsync({
       useFactory: async () =>

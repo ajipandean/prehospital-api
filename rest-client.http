@@ -1,0 +1,7 @@
+POST http://localhost:8080/users
+Content-Type: application/json
+{
+  "group_name": "Primakara",
+  "email": "anjay@mail.com",
+  "password": "anjay"
+}

@@ -14,7 +14,6 @@ import {
 import { Request as Req, Response } from 'express';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { CreateUserDto } from './dto/create-user.dto';
-import { Users } from './users.entity';
 import { UsersService } from './users.service';
 
 @Controller('users')
@@ -25,17 +24,28 @@ export class UsersController {
   async insertOne(
     @Body() user: CreateUserDto,
     @Res({ passthrough: true }) res: Response,
-  ): Promise<Users> {
+  ): Promise<any> {
     const isUserExist = await this.userService.countUsers({
       email: user.email,
     });
     if (isUserExist)
-      throw new BadRequestException(
-        `User with email ${user.email} already exist.`,
-      );
+      return {
+        error: false,
+        message: `User with email ${user.email} already exist.`,
+        data: null,
+      };
+
+    const newUser = await this.userService.insertOne(user);
+    delete newUser['password'];
 
     res.status(HttpStatus.CREATED);
-    return await this.userService.insertOne(user);
+    return {
+      error: false,
+      message: 'User has been created successfully.',
+      data: {
+        user: newUser,
+      },
+    };
   }
 
   @UseGuards(JwtAuthGuard)

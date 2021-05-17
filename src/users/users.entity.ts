@@ -19,6 +19,9 @@ export class Users {
   @Column()
   group_name: string;
 
+  @Column({ type: 'varchar', length: 14 })
+  telp: string;
+
   @Column()
   email: string;
 

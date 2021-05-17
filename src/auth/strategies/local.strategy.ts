@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-local';
 import * as bcrypt from 'bcrypt';
@@ -13,11 +13,21 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
   async validate(email: string, password: string): Promise<any> {
     const user = await this.authService.findByEmail(email);
     if (!user)
-      throw new UnauthorizedException(`User with email ${email} not found`);
+      throw new UnauthorizedException({
+        data: null,
+        error: true,
+        statusCode: HttpStatus.UNAUTHORIZED,
+        message: `User with email ${email} not found`,
+      });
 
     const isPasswordMatch = await bcrypt.compare(password, user.password);
     if (!isPasswordMatch)
-      throw new UnauthorizedException(`Invalid password for email ${email}`);
+      throw new UnauthorizedException({
+        data: null,
+        error: true,
+        statusCode: HttpStatus.UNAUTHORIZED,
+        message: `Invalid password for email ${email}`,
+      });
 
     delete user['password'];
     return user;

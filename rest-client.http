@@ -7,3 +7,25 @@ Content-Type: application/json
   "email": "anjay@mail.com",
   "password": "anjay"
 }
+
+###
+
+POST http://localhost:8080/auth/sign-in
+Content-Type: application/json
+
+{
+  "email": "anjay@mail.com",
+  "password": "anjay"
+}
+
+###
+
+POST https://canary-dot-g-one-db.an.r.appspot.com/users
+Content-Type: application/json
+
+{
+  "group_name": "Primakara",
+  "telp": "081236229353",
+  "email": "anjay@mail.com",
+  "password": "anjay"
+}

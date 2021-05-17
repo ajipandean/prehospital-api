@@ -29,11 +29,12 @@ export class UsersController {
       email: user.email,
     });
     if (isUserExist)
-      return {
-        error: false,
+      throw new BadRequestException({
+        error: true,
+        statusCode: HttpStatus.BAD_REQUEST,
         message: `User with email ${user.email} already exist.`,
         data: null,
-      };
+      });
 
     const newUser = await this.userService.insertOne(user);
     delete newUser['password'];
@@ -41,6 +42,7 @@ export class UsersController {
     res.status(HttpStatus.CREATED);
     return {
       error: false,
+      statusCode: HttpStatus.OK,
       message: 'User has been created successfully.',
       data: {
         user: newUser,
@@ -62,8 +64,25 @@ export class UsersController {
   ): Promise<any> {
     const isUserExist = await this.userService.countUsers({ id: params.id });
     if (!isUserExist)
-      throw new BadRequestException(`User with id ${params.id} doesn't exists`);
+      throw new BadRequestException({
+        error: true,
+        statusCode: HttpStatus.BAD_REQUEST,
+        message: `User with id ${params.id} doesn't exists`,
+        data: null,
+      });
 
-    return await this.userService.updateOne(params.id, createUserDto);
+    const editedUser = await this.userService.updateOne(
+      params.id,
+      createUserDto,
+    );
+
+    return {
+      error: false,
+      statusCode: HttpStatus.OK,
+      message: 'User has been updated sucessfully.',
+      data: {
+        user: editedUser,
+      },
+    };
   }
 }

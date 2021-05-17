@@ -1,5 +1,4 @@
 import {
-  BadRequestException,
   Body,
   Controller,
   Get,
@@ -30,7 +29,7 @@ export class UsersController {
     });
     if (isUserExist)
       return {
-        error: false,
+        error: true,
         message: `User with email ${user.email} already exist.`,
         data: null,
       };
@@ -62,8 +61,23 @@ export class UsersController {
   ): Promise<any> {
     const isUserExist = await this.userService.countUsers({ id: params.id });
     if (!isUserExist)
-      throw new BadRequestException(`User with id ${params.id} doesn't exists`);
+      return {
+        error: true,
+        message: `User with id ${params.id} doesn't exists`,
+        data: null,
+      };
 
-    return await this.userService.updateOne(params.id, createUserDto);
+    const editedUser = await this.userService.updateOne(
+      params.id,
+      createUserDto,
+    );
+
+    return {
+      error: false,
+      message: 'User has been updated sucessfully.',
+      data: {
+        user: editedUser,
+      },
+    };
   }
 }

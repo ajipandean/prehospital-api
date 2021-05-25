@@ -10,7 +10,6 @@ import {
 import { Server, Socket } from 'socket.io';
 import { CreateMessageDto } from 'src/messages/dto/create-message.dto';
 import { MessagesService } from 'src/messages/messages.service';
-import { Chats } from './chats.entity';
 import { ChatsService } from './chats.service';
 import { CreateChatDto } from './dto/create-chat.dto';
 

@@ -4,19 +4,40 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { Chats } from 'src/chats/chats.entity';
+import { Hospitals } from 'src/hospitals/hospitals.entity';
+
+enum AccountTypes {
+  NURSE = 'NURSE',
+  DOCTOR = 'DOCTOR',
+  DRIVER = 'DRIVER',
+}
 
 @Entity()
 export class Users {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @OneToOne(() => Hospitals)
+  @JoinColumn({ name: 'hospital_id' })
+  hospital: Hospitals;
+
+  @Column({
+    type: 'enum',
+    enum: AccountTypes,
+    default: AccountTypes.NURSE,
+    name: 'account_type',
+  })
+  accountType: AccountTypes;
+
+  @Column({ nullable: true })
   group_name: string;
 
   @Column({ type: 'varchar', length: 14 })

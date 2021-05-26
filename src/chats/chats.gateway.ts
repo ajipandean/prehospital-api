@@ -24,27 +24,35 @@ export class ChatsGateway implements OnGatewayConnection, OnGatewayDisconnect {
   server: Server;
 
   @SubscribeMessage('send_message')
-  async handleSendMessage(
-    @ConnectedSocket() client: Socket,
-    @MessageBody() createMessageDto: CreateMessageDto
-  ) {
-    client.join(createMessageDto.chat.id);
+  async handleSendMessage(@MessageBody() createMessageDto: CreateMessageDto) {
     const newMessage = await this.messagesService.insertOne(createMessageDto);
-    this.server.to(newMessage.chat.id).emit('recv_message', newMessage);
+    this.server.to(createMessageDto.chat.id).emit('recv_message', newMessage);
+  }
+
+  @SubscribeMessage('send_bulk_messages')
+  async handleSendBulkMessages(@MessageBody() createMessageDto: string) {
+    const parsedMessages: CreateMessageDto[] = JSON.parse(createMessageDto)
+    const newMessages = await this.messagesService.insertMany(parsedMessages);
+    this.server.to(parsedMessages[0].chat.id).emit('recv_bulk_messages', newMessages)
+  }
+
+  @SubscribeMessage('join_chat')
+  handleJoinChat(
+    @ConnectedSocket() client: Socket,
+    @MessageBody() id: string,
+  ) {
+    client.join(id)
   }
 
   @SubscribeMessage('init_chat')
-  async handleInitChat(
-    @ConnectedSocket() client: Socket,
-    @MessageBody() data: string,
-  ) {
+  async handleInitChat(@MessageBody() data: string) {
     const createChatDto: CreateChatDto = JSON.parse(data);
     const chat = await this.chatsService.insertOne(createChatDto);
     return chat;
   }
 
   @SubscribeMessage("test")
-  handleTest(@MessageBody() data: String): String {
+  handleTest(): String {
     console.log("Hello from socket");
     return "Hello too";
   }

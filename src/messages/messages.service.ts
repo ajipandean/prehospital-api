@@ -15,4 +15,13 @@ export class MessagesService {
     const newMessage = this.messagesRepository.create(createMessageDto);
     return await this.messagesRepository.save(newMessage);
   }
+  
+  async insertMany(createMessageDto: CreateMessageDto[]): Promise<Messages[]> {
+    const result: Messages[] = []
+    createMessageDto.map(async m => {
+      const newMessage = await this.insertOne(m)
+      result.push(newMessage)
+    })
+    return result
+  }
 }

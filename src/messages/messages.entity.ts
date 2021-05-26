@@ -20,10 +20,22 @@ export class Messages {
   chat: Chats;
 
   @Column()
-  header: string;
+  message: string;
+
+  @Column({ nullable: true })
+  result: string;
+
+  @Column({ nullable: true })
+  response: string;
+
+  @Column({ nullable: true })
+  condition: string;
+
+  @Column({ nullable: true })
+  action: string;
 
   @Column()
-  body: string;
+  creation_time: string;
 
   @Column({ default: false })
   is_deleted: boolean;

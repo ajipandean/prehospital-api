@@ -1,5 +1,5 @@
 import { Chats } from 'src/chats/chats.entity';
-import { Doctors } from 'src/doctors/doctors.entity';
+import { Users } from 'src/users/users.entity';
 import {
   Column,
   CreateDateColumn,
@@ -18,8 +18,8 @@ export class Hospitals {
   @OneToMany(() => Chats, (chat) => chat.hospital)
   chats: Chats;
 
-  @OneToMany(() => Doctors, (doctor) => doctor.hospital)
-  doctors: Doctors;
+  @OneToMany(() => Users, (user) => user.hospital)
+  users: Users;
 
   @Column({ length: 8 })
   code: string;

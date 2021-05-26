@@ -5,8 +5,8 @@ import {
   DeleteDateColumn,
   Entity,
   JoinColumn,
+  ManyToOne,
   OneToMany,
-  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -25,9 +25,12 @@ export class Users {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @OneToOne(() => Hospitals)
+  @ManyToOne(() => Hospitals, (hospital) => hospital.users)
   @JoinColumn({ name: 'hospital_id' })
   hospital: Hospitals;
+
+  @OneToMany(() => Chats, (chat) => chat.user)
+  chats: Chats;
 
   @Column({
     type: 'enum',
@@ -49,11 +52,11 @@ export class Users {
   @Column()
   password: string;
 
+  @Column({ nullable: true })
+  fcm_token: string;
+
   @Column({ default: false })
   is_deleted: boolean;
-
-  @OneToMany(() => Chats, (chat) => chat.user)
-  chats: Chats;
 
   @CreateDateColumn()
   created_at: Date;

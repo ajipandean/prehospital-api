@@ -10,22 +10,43 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:8080/auth/sign-in
+POST http://localhost:8080/users
 Content-Type: application/json
 
 {
-  "email": "anjay@mail.com",
-  "password": "anjay"
+  "email": "ashiap@mail.com",
+  "password": "ashiap",
+  "telp": "08123123123",
+  "hospital": {
+    "id": "1e5144ab-b47b-4bab-b86c-37f9593558f1",
+    "code": "5171155",
+    "name": "RS Umum Bhakti Rahayu",
+    "category": "D",
+    "status": "Tingkat Paripurna",
+    "rating": "5",
+    "address": "Jl. Gatot Subroto II no 11, Kecamatan Denpasar Utara",
+    "latitude": "-8.637159",
+    "longitude": "115.221063",
+    "owner": "Organisasi Sosial",
+    "telephone_number": "361430270",
+    "is_deleted": false,
+    "created_at": "2021-05-13T15:22:29.936Z",
+    "updated_at": "2021-05-13T15:22:29.936Z",
+    "deleted_at": null
+  },
+  "account_type": "DOCTOR"
 }
 
 ###
 
-POST https://canary-dot-g-one-db.an.r.appspot.com/users
+GET http://localhost:8080/hospitals
+
+###
+
+POST http://localhost:8080/auth/sign-in
 Content-Type: application/json
 
 {
-  "group_name": "Primakara",
-  "telp": "081236229353",
-  "email": "anjay@mail.com",
-  "password": "anjay"
+  "email": "ashiap@mail.com",
+  "password": "ashiap"
 }

@@ -35,7 +35,7 @@ export class Users {
     default: AccountTypes.NURSE,
     name: 'account_type',
   })
-  accountType: AccountTypes;
+  account_type: AccountTypes;
 
   @Column({ nullable: true })
   group_name: string;

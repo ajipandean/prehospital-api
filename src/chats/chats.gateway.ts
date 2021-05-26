@@ -31,17 +31,16 @@ export class ChatsGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
   @SubscribeMessage('send_bulk_messages')
   async handleSendBulkMessages(@MessageBody() createMessageDto: string) {
-    const parsedMessages: CreateMessageDto[] = JSON.parse(createMessageDto)
+    const parsedMessages: CreateMessageDto[] = JSON.parse(createMessageDto);
     const newMessages = await this.messagesService.insertMany(parsedMessages);
-    this.server.to(parsedMessages[0].chat.id).emit('recv_bulk_messages', newMessages)
+    this.server
+      .to(parsedMessages[0].chat.id)
+      .emit('recv_bulk_messages', newMessages);
   }
 
   @SubscribeMessage('join_chat')
-  handleJoinChat(
-    @ConnectedSocket() client: Socket,
-    @MessageBody() id: string,
-  ) {
-    client.join(id)
+  handleJoinChat(@ConnectedSocket() client: Socket, @MessageBody() id: string) {
+    client.join(id);
   }
 
   @SubscribeMessage('init_chat')
@@ -51,10 +50,10 @@ export class ChatsGateway implements OnGatewayConnection, OnGatewayDisconnect {
     return chat;
   }
 
-  @SubscribeMessage("test")
-  handleTest(): String {
-    console.log("Hello from socket");
-    return "Hello too";
+  @SubscribeMessage('test')
+  handleTest(): string {
+    console.log('Hello from socket');
+    return 'Hello too';
   }
 
   handleConnection() {

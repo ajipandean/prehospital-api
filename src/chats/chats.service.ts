@@ -12,7 +12,11 @@ export class ChatsService {
   ) {}
 
   async findAll(): Promise<Chats[]> {
-    return await this.chatsRepository.find();
+    return await this.chatsRepository
+      .createQueryBuilder('chat')
+      .leftJoinAndSelect('chat.user', 'user')
+      .leftJoinAndSelect('chat.hospital', 'hospital')
+      .getMany();
   }
 
   async findById(id: string): Promise<Chats> {

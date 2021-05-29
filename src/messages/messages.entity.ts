@@ -34,6 +34,9 @@ export class Messages {
   @Column({ nullable: true })
   action: string;
 
+  @Column({ nullable: true })
+  attachments: string;
+
   @Column()
   creation_time: string;
 

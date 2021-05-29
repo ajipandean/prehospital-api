@@ -8,4 +8,5 @@ export class CreateMessageDto {
   readonly response?: string;
   readonly condition?: string;
   readonly action?: string;
+  readonly attachments: string;
 }

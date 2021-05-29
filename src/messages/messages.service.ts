@@ -11,6 +11,13 @@ export class MessagesService {
     private readonly messagesRepository: Repository<Messages>,
   ) {}
 
+  async findMessagesByChatId(id: string): Promise<Messages[]> {
+    return await this.messagesRepository
+      .createQueryBuilder('message')
+      .where('message.chat = :id', { id })
+      .getMany();
+  }
+
   async insertOne(createMessageDto: CreateMessageDto): Promise<Messages> {
     const newMessage = this.messagesRepository.create(createMessageDto);
     return await this.messagesRepository.save(newMessage);

@@ -19,8 +19,12 @@ export class UsersService {
     return this.usersRepository.findOne(id);
   }
 
-  findByEmail(email: string): Promise<Users> {
-    return this.usersRepository.findOne({ email });
+  async findByEmail(email: string): Promise<Users> {
+    return await this.usersRepository
+      .createQueryBuilder('user')
+      .where('user.email = :email', { email })
+      .leftJoinAndSelect('user.hospital', 'hospital')
+      .getOne();
   }
 
   async insertOne(createUserDto: CreateUserDto): Promise<any> {

@@ -65,6 +65,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijg4MjE4YjUwL
 
 ###
 
+GET http://localhost:8080/chats/hospital/25e79957-c0c3-4570-a015-352380f38c1c
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijg4MjE4YjUwLTE5NWUtNDM1YS04ZGJhLTdmMmVhNjA3YzE3OSIsImlhdCI6MTYyMjMwNDAwNX0.4bbe_3LXd3y__RYVh8VA_COE1T_urU07ra5RpMjbOO4
+
+###
+
 POST http://localhost:8080/chats
 Content-Type: application/json
 

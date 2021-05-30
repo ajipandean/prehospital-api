@@ -15,6 +15,12 @@ export class ChatsController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @Get('hospital/:id')
+  async getChatsByHospital(@Param() params: any): Promise<Chats[]> {
+    return await this.chatsService.findAllByHospital(params.id);
+  }
+
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
   async getSingleChat(@Param() params: any): Promise<Chats> {
     return await this.chatsService.findById(params.id);

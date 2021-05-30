@@ -19,6 +19,15 @@ export class ChatsService {
       .getMany();
   }
 
+  async findAllByHospital(id: string): Promise<Chats[]> {
+    return await this.chatsRepository
+      .createQueryBuilder('chat')
+      .where('chat.hospital.id = :id', { id })
+      .leftJoinAndSelect('chat.user', 'user')
+      .leftJoinAndSelect('chat.hospital', 'hospital')
+      .getMany();
+  }
+
   async findById(id: string): Promise<Chats> {
     return await this.chatsRepository
       .createQueryBuilder('chat')

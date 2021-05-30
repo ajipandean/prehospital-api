@@ -15,6 +15,7 @@ export class MessagesService {
     return await this.messagesRepository
       .createQueryBuilder('message')
       .where('message.chat = :id', { id })
+      .orderBy('message.created_at', 'ASC')
       .getMany();
   }
 

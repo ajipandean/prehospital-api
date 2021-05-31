@@ -24,9 +24,10 @@ export class ChatsGateway implements OnGatewayConnection, OnGatewayDisconnect {
   server: Server;
 
   @SubscribeMessage('send_message')
-  async handleSendMessage(@MessageBody() createMessageDto: CreateMessageDto) {
-    const newMessage = await this.messagesService.insertOne(createMessageDto);
-    this.server.to(createMessageDto.chat.id).emit('recv_message', newMessage);
+  async handleSendMessage(@MessageBody() createMessageDto: string) {
+    const parsedMessage: CreateMessageDto = JSON.parse(createMessageDto);
+    const newMessage = await this.messagesService.insertOne(parsedMessage);
+    this.server.to(parsedMessage.chat.id).emit('recv_message', newMessage);
   }
 
   @SubscribeMessage('send_bulk_messages')

@@ -40,4 +40,8 @@ export class ChatsService {
     const chat = this.chatsRepository.create(createChatDto);
     return await this.chatsRepository.save(chat);
   }
+
+  async updateOne(id: string, prediction: string) {
+    await this.chatsRepository.update({ id }, { prediction });
+  }
 }

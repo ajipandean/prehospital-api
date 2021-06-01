@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Put,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { Chats } from './chats.entity';
 import { ChatsService } from './chats.service';
@@ -24,6 +33,17 @@ export class ChatsController {
   @Get(':id')
   async getSingleChat(@Param() params: any): Promise<Chats> {
     return await this.chatsService.findById(params.id);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Put(':id')
+  async updateChatPrediction(@Param() params: any, @Query('p') p: string) {
+    await this.chatsService.updateOne(params.id, p);
+    return {
+      error: false,
+      message: 'Chat has been updated successfully',
+      data: null,
+    };
   }
 
   // Testing endpoints

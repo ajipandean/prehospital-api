@@ -1,0 +1,169 @@
+### HOSPITALS
+### GET ALL DATA HOSPITALS
+GET http://localhost:8080/hospitals HTTP/1.1
+
+### END HOSPITALS
+
+### AUTH
+### SIGNUP FOR NURSES
+POST http://localhost:8080/users HTTP/1.1
+Content-Type: application/json
+
+{
+  "group_name": "Primakara",
+  "telp": "081236229353",
+  "email": "anjay@mail.com",
+  "password": "anjay"
+}ENDPOINTS
+
+### SIGNUP FOR DOCTOR
+POST http://localhost:8080/users HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "ashiap@mail.com",
+  "password": "ashiap",
+  "telp": "08123123123",
+  "hospital": {
+    "id": "1e5144ab-b47b-4bab-b86c-37f9593558f1",
+    "code": "5171155",
+    "name": "RS Umum Bhakti Rahayu",
+    "category": "D",
+    "status": "Tingkat Paripurna",
+    "rating": "5",
+    "address": "Jl. Gatot Subroto II no 11, Kecamatan Denpasar Utara",
+    "latitude": "-8.637159",
+    "longitude": "115.221063",
+    "owner": "Organisasi Sosial",
+    "telephone_number": "361430270",
+    "is_deleted": false,
+    "created_at": "2021-05-13T15:22:29.936Z",
+    "updated_at": "2021-05-13T15:22:29.936Z",
+    "deleted_at": null
+  },
+  "account_type": "DOCTOR"
+}
+
+### SIGNIN USERS
+POST http://localhost:8080/auth/sign-in HTTP/1.1
+Content-Type: application/json
+
+{
+  "email": "anjay@mail.com",
+  "password": "anjay"
+}
+
+### END AUTH
+
+### CHATS
+### GET ALL DATA CHATS
+GET http://localhost:8080/chats HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer TOKEN_FROM_LOGIN
+
+### GET CHAT BASED ON ID
+### Make sure to replace {id} with the actual chat ID
+GET http://localhost:8080/chats/{id} HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer TOKEN_FROM_LOGIN
+
+### GET CHAT BASED ON HOSPITAL ID
+### Make sure to replace {hospital_id} with the actual hospital ID
+GET http://localhost:8080/chats/hospital/{hospital_id} HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer TOKEN_FROM_LOGIN
+
+### CREATE NEW CHAT
+POST http://localhost:8080/chats HTTP/1.1
+Content-Type: application/json
+
+{
+  "user": {
+      "id": "88218b50-195e-435a-8dba-7f2ea607c179",
+      "account_type": "NURSE",
+      "group_name": "Primakara",
+      "telp": "081236229353",
+      "email": "anjay@mail.com",
+      "fcm_token": null,
+      "is_deleted": false,
+      "created_at": "2021-05-29T09:36:59.736Z",
+      "updated_at": "2021-05-29T09:36:59.736Z",
+      "deleted_at": null,
+      "hospital": null
+    },
+  "hospital": {
+    "id": "1e5144ab-b47b-4bab-b86c-37f9593558f1",
+    "code": "5171155",
+    "name": "RS Umum Bhakti Rahayu",
+    "category": "D",
+    "status": "Tingkat Paripurna",
+    "rating": "5",
+    "address": "Jl. Gatot Subroto II no 11, Kecamatan Denpasar Utara",
+    "latitude": "-8.637159",
+    "longitude": "115.221063",
+    "owner": "Organisasi Sosial",
+    "telephone_number": "361430270",
+    "is_deleted": false,
+    "created_at": "2021-05-26T14:29:09.970Z",
+    "updated_at": "2021-05-26T14:29:09.970Z",
+    "deleted_at": null
+  }
+}
+
+### END CHATS
+
+### MESSAGES
+### GET MESSAGES BASED ON CHAT ID
+### Make sure you replace {chat_id} with the actual chat ID
+GET http://localhost:8080/messages/chat/{chat_id} HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer TOKEN_FROM_LOGIN
+
+### CREATE NEW MESSAGE
+POST http://localhost:8080/messages
+Content-Type: application/json
+
+{
+  "chat": {
+    "id": "b5b253d9-d957-4da1-956b-8d1bf17fd00f",
+    "is_deleted": false,
+    "created_at": "2021-05-29T16:01:34.332Z",
+    "updated_at": "2021-05-29T16:01:34.332Z",
+    "deleted_at": null,
+    "user": {
+      "id": "88218b50-195e-435a-8dba-7f2ea607c179",
+      "account_type": "NURSE",
+      "group_name": "Primakara",
+      "telp": "081236229353",
+      "email": "anjay@mail.com",
+      "password": "$2b$10$QI6viZ/yqNJiAfxG.m0Xw.gIxONPzBYUij0Gr1JcJvPoEhjknrD4u",
+      "fcm_token": null,
+      "is_deleted": false,
+      "created_at": "2021-05-29T09:36:59.736Z",
+      "updated_at": "2021-05-29T09:36:59.736Z",
+      "deleted_at": null
+    },
+    "hospital": {
+      "id": "1e5144ab-b47b-4bab-b86c-37f9593558f1",
+      "code": "5171155",
+      "name": "RS Umum Bhakti Rahayu",
+      "category": "D",
+      "status": "Tingkat Paripurna",
+      "rating": "5",
+      "address": "Jl. Gatot Subroto II no 11, Kecamatan Denpasar Utara",
+      "latitude": "-8.637159",
+      "longitude": "115.221063",
+      "owner": "Organisasi Sosial",
+      "telephone_number": "361430270",
+      "is_deleted": false,
+      "created_at": "2021-05-26T14:29:09.970Z",
+      "updated_at": "2021-05-26T14:29:09.970Z",
+      "deleted_at": null
+    }
+  },
+  "creation_time": "19:20",
+  "message": "Posisi awal",
+  "attachments": "/content/Storage/0/ashiap.jpg"
+}
+
+### END MESSAGES

@@ -29,6 +29,9 @@ export class Chats {
   @JoinColumn({ name: 'hospital_id' })
   hospital: Hospitals;
 
+  @Column({ nullable: true })
+  prediction: string;
+
   @Column({ default: false })
   is_deleted: boolean;
 

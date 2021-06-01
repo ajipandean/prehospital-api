@@ -2,7 +2,12 @@
 ### GET ALL DATA HOSPITALS
 GET http://localhost:8080/hospitals HTTP/1.1
 
+### GET NEAREST HOSPITALS
+GET http://localhost:8080/hospitals/-8.675881100871722/115.21376462468571 HTTP/1.1
+
 ### END HOSPITALS
+
+
 
 ### AUTH
 ### SIGNUP FOR NURSES
@@ -14,7 +19,7 @@ Content-Type: application/json
   "telp": "081236229353",
   "email": "anjay@mail.com",
   "password": "anjay"
-}ENDPOINTS
+}
 
 ### SIGNUP FOR DOCTOR
 POST http://localhost:8080/users HTTP/1.1
@@ -54,6 +59,8 @@ Content-Type: application/json
 }
 
 ### END AUTH
+
+
 
 ### CHATS
 ### GET ALL DATA CHATS
@@ -111,6 +118,8 @@ Content-Type: application/json
 }
 
 ### END CHATS
+
+
 
 ### MESSAGES
 ### GET MESSAGES BASED ON CHAT ID

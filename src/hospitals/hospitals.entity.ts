@@ -62,4 +62,6 @@ export class Hospitals {
 
   @DeleteDateColumn()
   deleted_at: Date;
+
+  distances_from_ambulance: number;
 }

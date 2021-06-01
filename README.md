@@ -1,73 +1,87 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
+<p align="center" style="margin-top: 32px;margin-bottom: 16px;">
+  <img src="https://trello-attachments.s3.amazonaws.com/6090d4246149261a17b24089/60911a77064d92878e158b34/4dfc89d87d9160a3b35e6fa2f36eb0b4/Logo.png" alt="G-One Logo" />
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# G-One Prehospital
+> Repository for G-One Prehospital API
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+<details open="open">
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#api-endpoints">API Endpoints</a></li>
+    <li><a href="#references">References</a></li>
+  </ol>
+</details>
 
-## Description
+## Getting Started
+This project is built using Javascript with NodeJS as runtime and NestJS as framework. The database that we use to store data is MySQL.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+### Prerequisites
+Please make sure you have these programs installed on your computer/laptop.
 
-## Installation
+* NodeJS v12.22.1 or later
+* NPM v6.14.12 or later
+* Yarn v1.22.10 or later
+* XAMPP v8.0.1 or later
 
-```bash
-$ npm install
-```
+### Installation
+Follow these steps to replicate this project to your local computer/laptop.
 
-## Running the app
+1. Clone this project
+   ```bash
+   # Using HTTPS
+   git clone https://github.com/g-one-capstone/prehospital-api.git
 
-```bash
-# development
-$ npm run start
+   # Using SSH
+   git clone git@github.com:g-one-capstone/prehospital-api.git
+   ```
+2. Install dependencies
+   ```bash
+   $ cd prehospital-api
+   $ yarn
+   ```
+3. Duplicate ```.env.example``` and rename to ```.env.development``` for development purpose
+   ```bash
+   $ cp .env.example .env
+   ```
+4. Edit file ```.env.development```
+   ```bash
+   # .env.development
+   PORT=8080
+   HOST=localhost
 
-# watch mode
-$ npm run start:dev
+   DB_TYPE=mysql
+   DB_HOST=localhost
+   DB_PORT=3306
+   DB_USERNAME=root
+   DB_PASSWORD=
+   DB_DATABASE=db_prehospital
+   DB_SYNC=true # set to false for production
+   ```
+5. Create database with the name ```db_prehospital``` in your local MySQL using phpmyadmin or mysql-client
+   ```mysql
+   CREATE DATABASE db_prehospital;
+   ```
+6. Import database from [here](https://trello-attachments.s3.amazonaws.com/6090d4246149261a17b24089/6097c919cb0433356fbee3d0/0a11cb6cd435e79dedf2b950e7d04db4/new_db_prehospital.sql) to ```db_prehospital``` database that you've just created in step 5
+7. Run locally
+   ```bash
+   # for development
+   $ NODE_ENV=development yarn start:dev
+   ```
+8. Enjoy!
 
-# production mode
-$ npm run start:prod
-```
+## API Endpoints
+Visit file [api-enpoints.http]() to see all available endpoints.
 
-## Test
+Please make sure you use VS Code and have installed REST Client extension to run that file or you can use that file as reference and use another REST Client testing application.
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+## References
+1. NodeJS download link [here](https://nodejs.org/en/download/).
+2. XAMPP download link [here](https://www.apachefriends.org/download.html).

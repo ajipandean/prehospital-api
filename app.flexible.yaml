@@ -1,6 +1,5 @@
 runtime: nodejs
 env: flex
-service: canary
 
 manual_scaling:
   instances: 1
@@ -10,4 +9,4 @@ network:
   session_affinity: true
 
 beta_settings:
-  cloud_sql_instances: g-one-db:asia-northeast1:prehospital-db-canary
+  cloud_sql_instances: g-one-db:asia-southeast2:g-one-sql-jakarta

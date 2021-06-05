@@ -20,6 +20,7 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "gcp-build": "yarn build",
+    "deploy": "gcloud app deploy app.flexible.yaml",
     "deploy:canary": "gcloud app deploy canary.yaml"
   },
   "dependencies": {

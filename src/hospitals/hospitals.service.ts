@@ -9,7 +9,7 @@ export class HospitalsService {
   constructor(
     @InjectRepository(Hospitals)
     private readonly hospitalsRepository: Repository<Hospitals>,
-  ) {}
+  ) { }
 
   getDistance(lat1: number, lon1: number, lat2: number, lon2: number) {
     const deg2rad = (n: number) => n * (Math.PI / 180.0);
@@ -22,14 +22,18 @@ export class HospitalsService {
       let distance =
         Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) +
         Math.cos(deg2rad(lat1)) *
-          Math.cos(deg2rad(lat2)) *
-          Math.cos(deg2rad(theta));
+        Math.cos(deg2rad(lat2)) *
+        Math.cos(deg2rad(theta));
       distance = Math.acos(distance);
       distance = rad2deg(distance);
 
       const miles = distance * 60 * 1.1515;
       return miles * 1.609344;
     }
+  }
+
+  async fetchHospitals(): Promise<Hospitals[]> {
+    return await this.hospitalsRepository.find()
   }
 
   async findAll(

@@ -7,6 +7,11 @@ import { HospitalsService } from './hospitals.service';
 export class HospitalsController {
   constructor(private readonly hospitalsService: HospitalsService) {}
 
+  @Get("")
+  async getAllHospitals(): Promise<Hospitals[]> {
+    return await this.hospitalsService.fetchHospitals()
+  }
+
   @Get(':latitude/:longitude')
   async getHospitals(@Param() params: any): Promise<Hospitals[]> {
     const coordinate: CurrentCoordinateDto = {
